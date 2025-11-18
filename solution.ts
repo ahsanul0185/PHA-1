@@ -32,7 +32,7 @@ class Person {
   }
 
   getDetails(): string {
-    return `Name: ${this.name}, Age: ${this.age}`;
+    return `'Name: ${this.name}, Age: ${this.age}'`;
   }
 }
 
@@ -77,7 +77,14 @@ const getUniqueValues = <T extends string | number>(
   arr2: T[]
 ): T[] => {
   const uniqueArray: T[] = [];
-  const mixedArray = [...arr1, ...arr2];
+
+  const mixedArray: T[] = [];
+  for (let i = 0; i < arr1.length; i++) {
+    mixedArray[mixedArray.length] = arr1[i];
+  }
+  for (let i = 0; i < arr2.length; i++) {
+    mixedArray[mixedArray.length] = arr2[i];
+  }
 
   const isUnique = (value: T): boolean => {
     for (let i = 0; i < uniqueArray.length; i++) {
@@ -85,13 +92,12 @@ const getUniqueValues = <T extends string | number>(
         return false;
       }
     }
-
     return true;
   };
 
   for (let i = 0; i < mixedArray.length; i++) {
     if (isUnique(mixedArray[i])) {
-      uniqueArray.push(mixedArray[i]);
+      uniqueArray[uniqueArray.length] = mixedArray[i];
     }
   }
 
